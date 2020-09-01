@@ -1,0 +1,26 @@
+.leaflet-legend {
+  background: white;
+  background-clip: padding-box;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: .5rem;
+}
+
+.leaflet-legend ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.leaflet-legend li {
+  display: flex;
+  padding: .2rem 0;
+}
+
+.leaflet-legend .leaflet-legend-color {
+  flex: 0 0 20px;
+  height: 20px;
+  margin-right: .2rem;
+  width: 20px;
+}

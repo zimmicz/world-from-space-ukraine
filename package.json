@@ -1,0 +1,25 @@
+{
+  "name": "world-from-space-ukraine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build index.html",
+    "dev": "parcel index.html",
+    "watch": "parcel watch index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "leaflet": "^1.6.0",
+    "leaflet-clonelayer": "^1.0.7",
+    "leaflet-control-custom": "^1.0.0",
+    "leaflet.sync": "^0.2.4",
+    "moment": "^2.27.0",
+    "normalize.css": "^8.0.1"
+  }
+}
