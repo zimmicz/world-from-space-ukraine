@@ -1,6 +1,5 @@
 import leaflet from 'leaflet';
 import cloneLayer from 'leaflet-clonelayer';
-import moment from 'moment';
 import 'normalize.css';
 import '../node_modules/leaflet/dist/leaflet.css';
 import 'leaflet.sync';
@@ -10,6 +9,7 @@ import timelineControl from './l.control.timeline';
 import legendControl from './legend/control';
 
 let rightMap;
+let leftLegend;
 
 const rightOverlays = Object
   .entries(overlays)
@@ -26,6 +26,7 @@ const toggleRightMap = (leftMap) => {
 
   if (!rightMap) {
     L.DomUtil.removeClass(L.DomUtil.get('map2'), 'hidden');
+    leftLegend.setPosition('bottomleft');
     rightMap = L.map('map2', {
       center: leftMap.getCenter(),
       zoom: leftMap.getZoom(),
@@ -64,13 +65,13 @@ const toggleRightMap = (leftMap) => {
     rightMap.remove();
     rightMap = undefined;
     L.DomUtil.addClass(L.DomUtil.get('map2'), 'hidden');
+    leftLegend.setPosition('topright');
   }
 }
 
 initializeLeftMap();
 
 function initializeLeftMap() {
-  let legend;
   let leftTimelineControl;
   const leftMap = L.map('map1', {
     center: [51.505, -0.09],
@@ -83,19 +84,20 @@ function initializeLeftMap() {
     leftTimelineControl = timelineControl({
       range: e.layer.options.range,
       autoplay: true,
-      dateFormat: 'MMM YYYY',
+      dateFormat: 'MMM <br /> YYYY',
       position: 'bottomleft',
     });
 
     leftMap.addControl(leftTimelineControl);
 
-    legend && leftMap.removeControl(legend);
+    leftLegend && leftMap.removeControl(leftLegend);
 
     if (e.layer.options.legend) {
-      legend = legendControl({
+      leftLegend = legendControl({
         layer: e.layer,
+        position: rightMap ? 'topleft' : 'topright',
       });
-      leftMap.addControl(legend);
+      leftMap.addControl(leftLegend);
     }
   });
 
