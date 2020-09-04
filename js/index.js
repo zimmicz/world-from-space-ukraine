@@ -10,6 +10,7 @@ import legendControl from './legend/control';
 
 let rightMap;
 let leftLegend;
+let leftTimelineControl;
 
 const rightOverlays = Object
   .entries(overlays)
@@ -27,6 +28,7 @@ const toggleRightMap = (leftMap) => {
   if (!rightMap) {
     L.DomUtil.removeClass(L.DomUtil.get('map2'), 'hidden');
     leftLegend.setPosition('bottomleft');
+    leftTimelineControl.setSize('small');
     rightMap = L.map('map2', {
       center: leftMap.getCenter(),
       zoom: leftMap.getZoom(),
@@ -41,8 +43,9 @@ const toggleRightMap = (leftMap) => {
       rightTimelineControl = timelineControl({
         range: e.layer.options.range,
         autoplay: true,
-        dateFormat: 'MMM YYYY',
+        dateFormat: 'MMM <br/> YYYY',
         position: 'bottomleft',
+        size: 'small',
       });
 
       rightMap.addControl(rightTimelineControl);
@@ -72,7 +75,6 @@ const toggleRightMap = (leftMap) => {
 initializeLeftMap();
 
 function initializeLeftMap() {
-  let leftTimelineControl;
   const leftMap = L.map('map1', {
     center: [51.505, -0.09],
     zoom: 13,

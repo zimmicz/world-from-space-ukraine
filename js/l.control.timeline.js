@@ -5,6 +5,7 @@ L.Control.Timeline = L.Control.extend({
     dateFormat: 'YYYY',
     interval: 1000,
     onNextStep: (current) => { console.log(`onNextStep ${current}`); },
+    size: '',
   },
   initialize: function(options) {
     L.Control.prototype.initialize.call(this, options);
@@ -27,7 +28,7 @@ L.Control.Timeline = L.Control.extend({
 
   onAdd: function(map) {
     const parent = map.getContainer();
-    const wrapper = L.DomUtil.create('div', 'leaflet-timeline', parent);
+    const wrapper = L.DomUtil.create('div', `leaflet-timeline ${this.options.size}`, parent);
     L.DomEvent.disableClickPropagation(wrapper);
     this._createPlayPauseButton(wrapper);
     this._createTimeRange(wrapper);
@@ -36,8 +37,11 @@ L.Control.Timeline = L.Control.extend({
   },
 
   onRemove: function() {
-    console.log('removed');
     this._destroyTimer();
+  },
+
+  setSize: function(size) {
+    this.getContainer().classList.toggle(size);
   },
 
   _createPlayPauseButton(parent) {
