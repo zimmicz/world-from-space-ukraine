@@ -195,14 +195,14 @@ export const SO2_MONTHLY_SP5 = L.tileLayer('https://{s}.tile.opentopomap.org/{z}
 });
 
 export const overlays = {
-  'CO_MONTHLY_SP5': CO_MONTHLY_SP5,
-  'CO_MONTHLY_CAMS': CO_MONTHLY_CAMS,
-  'NO2_MONTHLY_CAMS': NO2_MONTHLY_CAMS,
-  'NO2_MONTHLY_SP5': NO2_MONTHLY_SP5,
-  'O3_MONTHLY_CAMS': O3_MONTHLY_CAMS,
-  'PM10_MONTHLY_CAMS': PM10_MONTHLY_CAMS,
-  'PM25_MONTHLY_CAMS': PM25_MONTHLY_CAMS,
-  'SO2_MONTHLY_CAMS': SO2_MONTHLY_CAMS,
-  'SO2_MONTHLY_SP5': SO2_MONTHLY_SP5,
+  'CO monthly SP5': CO_MONTHLY_SP5,
+  'CO monthly cams': CO_MONTHLY_CAMS,
+  'NO<sub>2</sub> monthly cams': NO2_MONTHLY_CAMS,
+  'NO<sub>2</sub> monthly SP5': NO2_MONTHLY_SP5,
+  'O<sub>3</sub> monthly cams': O3_MONTHLY_CAMS,
+  'PM<sub>10</sub> monthly cams': PM10_MONTHLY_CAMS,
+  'PM<sub>25</sub> monthly cams': PM25_MONTHLY_CAMS,
+  'SO<sub>2</sub> monthly cams': SO2_MONTHLY_CAMS,
+  'SO<sub>2</sub> monthly sp5': SO2_MONTHLY_SP5,
 };
 
