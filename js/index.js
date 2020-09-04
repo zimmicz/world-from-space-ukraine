@@ -69,6 +69,7 @@ const toggleRightMap = (leftMap) => {
     rightMap = undefined;
     L.DomUtil.addClass(L.DomUtil.get('map2'), 'hidden');
     leftLegend.setPosition('topright');
+    leftTimelineControl.setSize('small');
   }
 }
 
@@ -111,9 +112,10 @@ function initializeLeftMap() {
       background: 'white',
       backgroundClip: 'padding-box',
       cursor: 'pointer',
-      fontWeight: 'bold',
+      left: '40px',
       margin: '10px',
-      padding: '10px',
+      padding: '7px 10px',
+      top: '-75px',
     },
     events: {
       click: () => toggleRightMap(leftMap),
