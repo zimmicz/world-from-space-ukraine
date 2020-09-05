@@ -1,8 +1,13 @@
 import cloneLayer from 'leaflet-clonelayer';
 import moment from 'moment';
 
-export const CO_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+export const BASE_LAYER = L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+});
+
+const CO_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/CO/2017_08/{z}/{x}/{y}.png', {
+  tms: true,
+  opacity: 0.7,
   legend: [
     { label: '<= 50', color: '#e8f6f6', },
     { label: '<= 75', color: '#d9eaea', },
@@ -25,8 +30,9 @@ export const CO_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{z}
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-export const CO_MONTHLY_SP5 = L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+const CO_MONTHLY_SP5 = L.tileLayer( 'http://tiles.worldfromspace.cz/UAMD/SP5/CO/2018_05/{z}/{x}/{y}.png', {
+  tms: true,
+  opacity: 0.7,
   legend: [
     { label: '<= -1', color: '#000000', value: -1,  },
     { label: '-1 - 0.29', color: '#e8f6f6', value: 0.29,  },
@@ -50,12 +56,9 @@ export const CO_MONTHLY_SP5 = L.tileLayer( 'https://{s}.tile.openstreetmap.org/{
   range: [moment('2018-05-01'), moment('2020-07-01')],
 });
 
-export const NO2_MONTHLY_CAMS = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  subdomains: 'abcd',
-  minZoom: 1,
-  maxZoom: 16,
-  ext: 'jpg',
+const NO2_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/NO2/2017_08/{z}/{x}/{y}.png', {
+  tms: true,
+  opacity: 0.7,
   legend: [
     { label: '< 1', color: '#002a8d', value: 1, },
     { label: '3', color: '#508cf4', value: 3, },
@@ -70,12 +73,9 @@ export const NO2_MONTHLY_CAMS = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fast
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-export const NO2_MONTHLY_SP5 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  subdomains: 'abcd',
-  minZoom: 1,
-  maxZoom: 16,
-  ext: 'jpg',
+const NO2_MONTHLY_SP5 = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/SP5/NO2/2017_08/{z}/{x}/{y}.png', {
+  tms: true,
+  opacity: 0.7,
   legend: [
     { color: '#000000', value: -1, label: '-1', },
     { color: '#002a8d', value: 0.1, label: '< 0.1', },
@@ -91,8 +91,9 @@ export const NO2_MONTHLY_SP5 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastl
   range: [moment('2018-05-01'), moment('2020-07-01')],
 });
 
-export const O3_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+const O3_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/O3/2017_08/{z}/{x}/{y}.png', {
+  tms: true,
+  opacity: 0.7,
   legend: [
     { value: 35, color: '#eff7d6', label: '<=  50', },
     { value: 40, color: '#e0e9b9', label: '50 - 55', },
@@ -111,8 +112,9 @@ export const O3_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{z}
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-export const PM10_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+const PM10_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/PM10/2017_08/{z}/{x}/{y}.png', {
+  tms: true,
+  opacity: 0.7,
   legend: [
     { label: '5', color: '#252ede', value: '5', },
     { label: '10', color: '#3669d2', value: '10', },
@@ -129,8 +131,9 @@ export const PM10_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-export const PM25_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+const PM25_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/PM25/2017_08/{z}/{x}/{y}.png', {
+  tms: true,
+  opacity: 0.7,
   legend: [
     { label: '7', color: '#252ede', value: 7, },
     { label: '8', color: '#3669d2', value: 8, },
@@ -147,8 +150,9 @@ export const PM25_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-export const SO2_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+const SO2_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/SO2/2017_08/{z}/{x}/{y}.png', {
+  tms: true,
+  opacity: 0.7,
   legend: [
     { value: 0.1, color: '#468dff', label: '< 0.1', },
     { value: 0.4, color: '#48bdff', label: '0.4', },
@@ -172,8 +176,9 @@ export const SO2_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{z
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-export const SO2_MONTHLY_SP5 = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+const SO2_MONTHLY_SP5 = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/SP5/SO2/2017_08/{z}/{x}/{y}.png', {
+  tms: true,
+  opacity: 0.7,
   legend: [
     { label: '-1', value: -1, color: '#000000', },
     { label: '0.1', value: 0.1, color: '#edfff6', },
@@ -195,7 +200,7 @@ export const SO2_MONTHLY_SP5 = L.tileLayer('https://{s}.tile.opentopomap.org/{z}
   range: [moment('2018-05-01'), moment('2020-07-01')],
 });
 
-export const overlays = {
+const overlays = {
   'CO monthly SP5': CO_MONTHLY_SP5,
   'CO monthly cams': CO_MONTHLY_CAMS,
   'NO<sub>2</sub> monthly cams': NO2_MONTHLY_CAMS,

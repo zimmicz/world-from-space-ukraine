@@ -3,7 +3,7 @@ import moment from 'moment';
 L.Control.Timeline = L.Control.extend({
   options: {
     dateFormat: 'YYYY',
-    interval: 1000,
+    interval: 2000,
     onNextStep: (current) => { console.log(`onNextStep ${current}`); },
     size: '',
   },

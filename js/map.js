@@ -15,12 +15,22 @@ export default function initialize(elem, options) {
     timelineControl && timelineControl.setSize(size);
   };
 
+  const onNextStep = (date) => {
+    map.eachLayer(layer => {
+      if (layer.options.range) {
+        const urlParts = layer._url.split('/');
+        urlParts[6] = date.format('YYYY_MM');
+        layer.setUrl(urlParts.join('/'));
+      }
+    });
+  };
+
   map.on('baselayerchange', (e) => {
     if (timelineControl) {
       map.removeControl(timelineControl);
     }
 
-    timelineControl = createTimelineControl(e, map);
+    timelineControl = createTimelineControl(e, onNextStep);
     map.addControl(timelineControl);
 
     if (legendControl) {
@@ -40,11 +50,12 @@ export default function initialize(elem, options) {
   };
 }
 
-function createTimelineControl(e) {
+function createTimelineControl(e, callback) {
   return TimelineControl({
     range: e.layer.options.range,
     autoplay: true,
     dateFormat: 'MMM <br /> YYYY',
+    onNextStep: callback,
     position: 'bottomleft',
   });
 }

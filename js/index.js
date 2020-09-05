@@ -4,9 +4,12 @@ import 'normalize.css';
 import '../node_modules/leaflet/dist/leaflet.css';
 import 'leaflet.sync';
 import 'leaflet-control-custom';
-import { cloneOverlays } from './config';
+import { BASE_LAYER, cloneOverlays } from './config';
 import Map from './map';
 
+let rightMap;
+const leftOverlays = cloneOverlays();
+const rightOverlays = cloneOverlays();
 const splitMapButton = L.control.custom({
   position: 'topleft',
   content: 'Split map',
@@ -29,33 +32,34 @@ const {
   map: leftMap,
   setLegendPosition: setLeftLegendPosition,
   setTimelineSize: setLeftTimelineSize,
-} = Map('map1', {
-  center: [51.505, -0.09],
-  zoom: 13,
-});
-
-const leftOverlays = cloneOverlays();
-const rightOverlays = cloneOverlays();
+} = Map('map1');
+leftMap.fitBounds([
+  [44.18, 22.14],
+  [52.38, 40.23],
+]);
 
 leftMap.addControl(L.control.layers(leftOverlays));
-leftMap.addLayer(leftOverlays[Object.keys(leftOverlays)[0]]);
+leftMap.addLayer(BASE_LAYER);
 leftMap.addControl(splitMapButton);
-
-let rightMap;
 
 const toggleRightMap = (leftMap) => {
   if (!rightMap) {
     L.DomUtil.removeClass(L.DomUtil.get('map2'), 'hidden');
-    setLeftLegendPosition('bottomleft');
-    rightMap = Map('map2', {
+    const right = Map('map2', {
       center: leftMap.getCenter(),
       zoom: leftMap.getZoom(),
-    }).map;
+    });
+    rightMap = right.map;
+    leftMap.getContainer().classList.toggle('small');
+    rightMap.getContainer().classList.toggle('small');
     rightMap.addControl(L.control.layers(rightOverlays));
     leftMap.sync(rightMap);
     rightMap.sync(leftMap);
-    rightMap.addLayer(rightOverlays[Object.keys(rightOverlays)[0]]);
+    rightMap.addLayer(cloneLayer(BASE_LAYER));
+    setLeftLegendPosition('bottomleft');
   } else {
+    leftMap.getContainer().classList.toggle('small');
+    rightMap.getContainer().classList.toggle('small');
     leftMap.unsync(rightMap);
     rightMap.unsync(leftMap);
     rightMap.off();
