@@ -66,19 +66,6 @@ L.Control.Timeline = L.Control.extend({
         this._handleNextStep();
       });
     });
-
-    /*
-    this.options.steps.forEach((step, i) => {
-      const point = L.DomUtil.create('span', 'leaflet-timeline-step', wrapper);
-      point.innerHTML = step.format(this.options.dateFormat);
-      point.id = `leaflet-timeline-step-${i}-${this.ID}`;
-      point.addEventListener('click', () => {
-        this.currentDate = step;
-        this._destroyTimer();
-        this._handleNextStep();
-      });
-    });
-    */
   },
 
   _handleNextStep() {

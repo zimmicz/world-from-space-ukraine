@@ -1,46 +1,56 @@
 import leaflet from 'leaflet';
 import TimelineControl from './l.control.timeline';
 import LegendControl from './legend/control';
-import { overlays } from './config';
-
-let timelineControl;
-let legendControl;
 
 export default function initialize(elem, options) {
   const map = L.map(elem, options);
+  let timelineControl;
+  let legendControl;
+
+  const setLegendPosition = (position) => {
+    legendControl && legendControl.setPosition(position);
+  };
+
+  const setTimelineSize = (size) => {
+    timelineControl && timelineControl.setSize(size);
+  };
 
   map.on('baselayerchange', (e) => {
-    updateTimelineOnLayerChange(e, map);
-    updateLegendOnLayerChange(e, map);
+    if (timelineControl) {
+      map.removeControl(timelineControl);
+    }
+
+    timelineControl = createTimelineControl(e, map);
+    map.addControl(timelineControl);
+
+    if (legendControl) {
+      map.removeControl(legendControl);
+    }
+
+    if (e.layer.options.legend) {
+      legendControl = createLegendControl(e);
+      map.addControl(legendControl);
+    }
   });
 
-  map.addControl(L.control.layers(overlays));
-  map.addLayer(overlays[Object.keys(overlays)[0]]);
-
-  return map;
+  return {
+    map,
+    setLegendPosition,
+    setTimelineSize,
+  };
 }
 
-function updateTimelineOnLayerChange(e, map) {
-  timelineControl && map.removeControl(timelineControl);
-
-  timelineControl = TimelineControl({
+function createTimelineControl(e) {
+  return TimelineControl({
     range: e.layer.options.range,
     autoplay: true,
     dateFormat: 'MMM <br /> YYYY',
     position: 'bottomleft',
   });
-
-  map.addControl(timelineControl);
 }
 
-function updateLegendOnLayerChange(e, map) {
-  legendControl && map.removeControl(legendControl);
-
-  if (e.layer.options.legend) {
-    legendControl = LegendControl({
-      layer: e.layer,
-      //position: rightMap ? 'topleft' : 'topright',
-    });
-    map.addControl(legendControl);
-  }
+function createLegendControl(e) {
+  return LegendControl({
+    layer: e.layer,
+  });
 }

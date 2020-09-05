@@ -4,17 +4,10 @@ import 'normalize.css';
 import '../node_modules/leaflet/dist/leaflet.css';
 import 'leaflet.sync';
 import 'leaflet-control-custom';
-import { overlays } from './config';
-import timelineControl from './l.control.timeline';
-import legendControl from './legend/control';
+import { cloneOverlays } from './config';
 import Map from './map';
 
-const leftMap = Map('map1', {
-  center: [51.505, -0.09],
-  zoom: 13,
-});
-
-L.control.custom({
+const splitMapButton = L.control.custom({
   position: 'topleft',
   content: 'Split map',
   classes: 'leaflet-bar',
@@ -30,60 +23,37 @@ L.control.custom({
   events: {
     click: () => toggleRightMap(leftMap),
   },
-}).addTo(leftMap);
+});
+
+const {
+  map: leftMap,
+  setLegendPosition: setLeftLegendPosition,
+  setTimelineSize: setLeftTimelineSize,
+} = Map('map1', {
+  center: [51.505, -0.09],
+  zoom: 13,
+});
+
+const leftOverlays = cloneOverlays();
+const rightOverlays = cloneOverlays();
+
+leftMap.addControl(L.control.layers(leftOverlays));
+leftMap.addLayer(leftOverlays[Object.keys(leftOverlays)[0]]);
+leftMap.addControl(splitMapButton);
 
 let rightMap;
-let leftLegend;
-let leftTimelineControl;
-
-const rightOverlays = Object
-  .entries(overlays)
-  .reduce((accum, [name, layer]) => {
-    return {
-      ...accum,
-      [name]: cloneLayer(layer),
-    };
-  }, {});
 
 const toggleRightMap = (leftMap) => {
-  let legend;
-  let rightTimelineControl;
-
   if (!rightMap) {
     L.DomUtil.removeClass(L.DomUtil.get('map2'), 'hidden');
-    leftLegend.setPosition('bottomleft');
-    leftTimelineControl.setSize('small');
-    rightMap = L.map('map2', {
+    setLeftLegendPosition('bottomleft');
+    rightMap = Map('map2', {
       center: leftMap.getCenter(),
       zoom: leftMap.getZoom(),
-    });
+    }).map;
     rightMap.addControl(L.control.layers(rightOverlays));
     leftMap.sync(rightMap);
     rightMap.sync(leftMap);
-
-    rightMap.on('baselayerchange', (e) => {
-      rightTimelineControl && rightMap.removeControl(rightTimelineControl);
-
-      rightTimelineControl = timelineControl({
-        range: e.layer.options.range,
-        autoplay: true,
-        dateFormat: 'MMM <br/> YYYY',
-        position: 'bottomleft',
-        size: 'small',
-      });
-
-      rightMap.addControl(rightTimelineControl);
-
-      legend && rightMap.removeControl(legend);
-
-      if (e.layer.options.legend) {
-        legend = legendControl({
-          layer: e.layer,
-        });
-        rightMap.addControl(legend);
-      }
-    });
-
     rightMap.addLayer(rightOverlays[Object.keys(rightOverlays)[0]]);
   } else {
     leftMap.unsync(rightMap);
@@ -92,7 +62,7 @@ const toggleRightMap = (leftMap) => {
     rightMap.remove();
     rightMap = undefined;
     L.DomUtil.addClass(L.DomUtil.get('map2'), 'hidden');
-    leftLegend.setPosition('topright');
-    leftTimelineControl.setSize('small');
+    setLeftLegendPosition('topright');
+    setLeftTimelineSize('small');
   }
 }

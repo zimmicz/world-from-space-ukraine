@@ -1,3 +1,4 @@
+import cloneLayer from 'leaflet-clonelayer';
 import moment from 'moment';
 
 export const CO_MONTHLY_CAMS = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
@@ -205,3 +206,13 @@ export const overlays = {
   'SO<sub>2</sub> monthly cams': SO2_MONTHLY_CAMS,
   'SO<sub>2</sub> monthly sp5': SO2_MONTHLY_SP5,
 };
+
+
+export const cloneOverlays = () => Object
+  .entries(overlays)
+  .reduce((accum, [name, layer]) => {
+    return {
+      ...accum,
+      [name]: cloneLayer(layer),
+    };
+  }, {});
