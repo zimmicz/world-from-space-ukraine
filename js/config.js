@@ -205,4 +205,3 @@ export const overlays = {
   'SO<sub>2</sub> monthly cams': SO2_MONTHLY_CAMS,
   'SO<sub>2</sub> monthly sp5': SO2_MONTHLY_SP5,
 };
-

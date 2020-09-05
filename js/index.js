@@ -7,6 +7,30 @@ import 'leaflet-control-custom';
 import { overlays } from './config';
 import timelineControl from './l.control.timeline';
 import legendControl from './legend/control';
+import Map from './map';
+
+const leftMap = Map('map1', {
+  center: [51.505, -0.09],
+  zoom: 13,
+});
+
+L.control.custom({
+  position: 'topleft',
+  content: 'Split map',
+  classes: 'leaflet-bar',
+  style: {
+    background: 'white',
+    backgroundClip: 'padding-box',
+    cursor: 'pointer',
+    left: '40px',
+    margin: '10px',
+    padding: '7px 10px',
+    top: '-75px',
+  },
+  events: {
+    click: () => toggleRightMap(leftMap),
+  },
+}).addTo(leftMap);
 
 let rightMap;
 let leftLegend;
@@ -71,57 +95,4 @@ const toggleRightMap = (leftMap) => {
     leftLegend.setPosition('topright');
     leftTimelineControl.setSize('small');
   }
-}
-
-initializeLeftMap();
-
-function initializeLeftMap() {
-  const leftMap = L.map('map1', {
-    center: [51.505, -0.09],
-    zoom: 13,
-  });
-
-  leftMap.on('baselayerchange', (e) => {
-    leftTimelineControl && leftMap.removeControl(leftTimelineControl);
-
-    leftTimelineControl = timelineControl({
-      range: e.layer.options.range,
-      autoplay: true,
-      dateFormat: 'MMM <br /> YYYY',
-      position: 'bottomleft',
-    });
-
-    leftMap.addControl(leftTimelineControl);
-
-    leftLegend && leftMap.removeControl(leftLegend);
-
-    if (e.layer.options.legend) {
-      leftLegend = legendControl({
-        layer: e.layer,
-        position: rightMap ? 'topleft' : 'topright',
-      });
-      leftMap.addControl(leftLegend);
-    }
-  });
-
-  L.control.custom({
-    position: 'topleft',
-    content: 'Split map',
-    classes: 'leaflet-bar',
-    style: {
-      background: 'white',
-      backgroundClip: 'padding-box',
-      cursor: 'pointer',
-      left: '40px',
-      margin: '10px',
-      padding: '7px 10px',
-      top: '-75px',
-    },
-    events: {
-      click: () => toggleRightMap(leftMap),
-    },
-  }).addTo(leftMap);
-  leftMap.addControl(L.control.layers(overlays));
-
-  leftMap.addLayer(overlays[Object.keys(overlays)[0]]);
 }
