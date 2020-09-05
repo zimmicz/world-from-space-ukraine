@@ -5,7 +5,7 @@ export const BASE_LAYER = L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 });
 
-const CO_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/CO/2017_08/{z}/{x}/{y}.png', {
+const CO_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/CO/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -30,7 +30,7 @@ const CO_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/CO
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-const CO_MONTHLY_SP5 = L.tileLayer( 'http://tiles.worldfromspace.cz/UAMD/SP5/CO/2018_05/{z}/{x}/{y}.png', {
+const CO_MONTHLY_SP5 = L.tileLayer( 'https://tiles.worldfromspace.cz/UAMD/SP5/CO/2018_05/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -56,7 +56,7 @@ const CO_MONTHLY_SP5 = L.tileLayer( 'http://tiles.worldfromspace.cz/UAMD/SP5/CO/
   range: [moment('2018-05-01'), moment('2020-07-01')],
 });
 
-const NO2_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/NO2/2017_08/{z}/{x}/{y}.png', {
+const NO2_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/NO2/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -73,7 +73,7 @@ const NO2_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/N
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-const NO2_MONTHLY_SP5 = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/SP5/NO2/2017_08/{z}/{x}/{y}.png', {
+const NO2_MONTHLY_SP5 = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/SP5/NO2/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -91,7 +91,7 @@ const NO2_MONTHLY_SP5 = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/SP5/NO2
   range: [moment('2018-05-01'), moment('2020-07-01')],
 });
 
-const O3_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/O3/2017_08/{z}/{x}/{y}.png', {
+const O3_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/O3/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -112,7 +112,7 @@ const O3_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/O3
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-const PM10_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/PM10/2017_08/{z}/{x}/{y}.png', {
+const PM10_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/PM10/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -131,7 +131,7 @@ const PM10_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-const PM25_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/PM25/2017_08/{z}/{x}/{y}.png', {
+const PM25_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/PM25/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -150,7 +150,7 @@ const PM25_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-const SO2_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/SO2/2017_08/{z}/{x}/{y}.png', {
+const SO2_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/SO2/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -176,7 +176,7 @@ const SO2_MONTHLY_CAMS = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/CAMS/S
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-const SO2_MONTHLY_SP5 = L.tileLayer('http://tiles.worldfromspace.cz/UAMD/SP5/SO2/2017_08/{z}/{x}/{y}.png', {
+const SO2_MONTHLY_SP5 = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/SP5/SO2/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
