@@ -30,7 +30,7 @@ const CO_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/C
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-const CO_MONTHLY_SP5 = L.tileLayer( 'https://tiles.worldfromspace.cz/UAMD/SP5/CO/2018_05/{z}/{x}/{y}.png', {
+const CO_MONTHLY_S5P = L.tileLayer( 'https://tiles.worldfromspace.cz/UAMD/S5P/CO/2018_05/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -73,7 +73,7 @@ const NO2_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-const NO2_MONTHLY_SP5 = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/SP5/NO2/2017_08/{z}/{x}/{y}.png', {
+const NO2_MONTHLY_S5P = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/S5P/NO2/2018_05/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -176,7 +176,7 @@ const SO2_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/
   range: [moment('2017-08-01'), moment('2020-07-01')],
 });
 
-const SO2_MONTHLY_SP5 = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/SP5/SO2/2017_08/{z}/{x}/{y}.png', {
+const SO2_MONTHLY_S5P = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/S5P/SO2/2018_05/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
   legend: [
@@ -201,15 +201,15 @@ const SO2_MONTHLY_SP5 = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/SP5/SO
 });
 
 const overlays = {
-  'CO monthly SP5': CO_MONTHLY_SP5,
+  'CO monthly S5P': CO_MONTHLY_S5P,
   'CO monthly cams': CO_MONTHLY_CAMS,
   'NO<sub>2</sub> monthly cams': NO2_MONTHLY_CAMS,
-  'NO<sub>2</sub> monthly SP5': NO2_MONTHLY_SP5,
+  'NO<sub>2</sub> monthly S5P': NO2_MONTHLY_S5P,
   'O<sub>3</sub> monthly cams': O3_MONTHLY_CAMS,
   'PM<sub>10</sub> monthly cams': PM10_MONTHLY_CAMS,
   'PM<sub>25</sub> monthly cams': PM25_MONTHLY_CAMS,
   'SO<sub>2</sub> monthly cams': SO2_MONTHLY_CAMS,
-  'SO<sub>2</sub> monthly sp5': SO2_MONTHLY_SP5,
+  'SO<sub>2</sub> monthly S5P': SO2_MONTHLY_S5P,
 };
 
 
