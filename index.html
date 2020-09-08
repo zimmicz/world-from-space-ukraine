@@ -44,6 +44,10 @@
         display: flex;
       }
 
+      .leaflet-popup-content {
+        width: 400px !important;
+      }
+
       .leaflet-timeline-container {
         flex: 1;
       }
@@ -65,6 +69,22 @@
 
       .leaflet-timeline-step:last-child {
         border-left: none;
+      }
+
+      .line {
+        fill: none;
+        stroke: black;
+        stroke-width: 1;
+      }
+
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+      .axis text {
+        font-size: 10px;
       }
 
       #content {
