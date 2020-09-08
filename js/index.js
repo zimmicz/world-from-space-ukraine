@@ -12,9 +12,10 @@ import geojson from '../data/UA_MD_raions_CO_CAMS.json';
 let rightMap;
 const leftOverlays = cloneOverlays();
 const rightOverlays = cloneOverlays();
+
 const splitMapButton = L.control.custom({
   position: 'topleft',
-  content: 'Split map',
+  content: 'Srovnat',
   classes: 'leaflet-bar',
   style: {
     background: 'white',
@@ -29,6 +30,24 @@ const splitMapButton = L.control.custom({
     click: () => toggleRightMap(leftMap),
   },
 });
+
+const layerSwitch = {
+  position: 'topleft',
+  content: 'Zobrazit adm. jednotky',
+  classes: 'leaflet-bar',
+  style: {
+    background: 'white',
+    backgroundClip: 'padding-box',
+    cursor: 'pointer',
+    left: '110px',
+    margin: '10px',
+    padding: '7px 10px',
+    top: '-131px',
+  },
+  events: {
+    click: () => toggleRightMap(leftMap),
+  },
+};
 
 function createChart({ feature }) {
   const values = Object
@@ -134,9 +153,8 @@ leftMap.fitBounds([
 leftMap.addControl(L.control.layers(leftOverlays));
 leftMap.addLayer(BASE_LAYER);
 leftMap.addControl(splitMapButton);
+leftMap.addControl(L.control.custom(layerSwitch));
 leftMap.addLayer(geojsonLayer);
-
-
 
 const toggleRightMap = (leftMap) => {
   if (!rightMap) {
@@ -149,6 +167,14 @@ const toggleRightMap = (leftMap) => {
     leftMap.getContainer().classList.toggle('small');
     rightMap.getContainer().classList.toggle('small');
     rightMap.addControl(L.control.layers(rightOverlays));
+    rightMap.addControl(L.control.custom({
+      ...layerSwitch,
+      style: {
+        ...layerSwitch.style,
+        left: '40px',
+        top: '-75px',
+      },
+    }));
     leftMap.sync(rightMap);
     rightMap.sync(leftMap);
     rightMap.addLayer(cloneLayer(BASE_LAYER));
