@@ -8,6 +8,8 @@ export const BASE_LAYER = L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{
 const CO_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/CO/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
+  name: 'CO',
+  type: 'CAMS',
   legend: [
     { label: '<= 50', color: '#e8f6f6', value: 50 },
     { label: '<= 75', color: '#d9eaea', value: 75, },
@@ -33,6 +35,8 @@ const CO_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/C
 const CO_MONTHLY_S5P = L.tileLayer( 'https://tiles.worldfromspace.cz/UAMD/S5P/CO/2018_05/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
+  name: 'CO',
+  type: 'S5P',
   legend: [
     { label: '<= -1', color: '#000000', value: -1,  },
     { label: '-1 - 0.29', color: '#e8f6f6', value: 0.29,  },
@@ -59,6 +63,8 @@ const CO_MONTHLY_S5P = L.tileLayer( 'https://tiles.worldfromspace.cz/UAMD/S5P/CO
 const NO2_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/NO2/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
+  name: 'NO2',
+  type: 'CAMS',
   legend: [
     { label: '< 1', color: '#002a8d', value: 1, },
     { label: '3', color: '#508cf4', value: 3, },
@@ -76,6 +82,8 @@ const NO2_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/
 const NO2_MONTHLY_S5P = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/S5P/NO2/2018_05/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
+  name: 'NO2',
+  type: 'S5P',
   legend: [
     { color: '#000000', value: -1, label: '-1', },
     { color: '#002a8d', value: 0.1, label: '< 0.1', },
@@ -94,6 +102,8 @@ const NO2_MONTHLY_S5P = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/S5P/NO
 const O3_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/O3/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
+  name: 'O3',
+  type: 'CAMS',
   legend: [
     { value: 35, color: '#eff7d6', label: '<=  50', },
     { value: 40, color: '#e0e9b9', label: '50 - 55', },
@@ -115,6 +125,8 @@ const O3_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/O
 const PM10_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/PM10/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
+  name: 'PM10',
+  type: 'CAMS',
   legend: [
     { label: '5', color: '#252ede', value: '5', },
     { label: '10', color: '#3669d2', value: '10', },
@@ -134,6 +146,8 @@ const PM10_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS
 const PM25_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/PM25/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
+  name: 'PM25',
+  type: 'CAMS',
   legend: [
     { label: '7', color: '#252ede', value: 7, },
     { label: '8', color: '#3669d2', value: 8, },
@@ -153,6 +167,8 @@ const PM25_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS
 const SO2_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/SO2/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
+  name: 'SO2',
+  type: 'CAMS',
   legend: [
     { value: 0.1, color: '#468dff', label: '< 0.1', },
     { value: 0.4, color: '#48bdff', label: '0.4', },
@@ -179,6 +195,8 @@ const SO2_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/
 const SO2_MONTHLY_S5P = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/S5P/SO2/2018_05/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,
+  name: 'SO2',
+  type: 'S5P',
   legend: [
     { label: '-1', value: -1, color: '#000000', },
     { label: '0.1', value: 0.1, color: '#edfff6', },

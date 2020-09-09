@@ -36,7 +36,10 @@ export function createChart({ feature }) {
   var y = d3.scaleLinear().range([height, 0]);
 
   x.domain(d3.extent(values, function(d) { return d.date; }));
-  y.domain([d3.min(values, function(d) { return d.value; }) - 5, d3.max(values, (d) => d.value) + 5]);
+  y.domain([
+    d3.min(values, (d) => d.value - (d.value * 0.1)),
+    d3.max(values, (d) => d.value + (d.value * 0.1))
+]);
 
   var valueline = d3.line()
     .x(function(d) { return x(d.date); })

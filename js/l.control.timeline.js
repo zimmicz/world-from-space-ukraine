@@ -46,7 +46,7 @@ L.Control.Timeline = L.Control.extend({
 
   _createPlayPauseButton(parent) {
     const button = L.DomUtil.create('button', 'leaflet-timeline-button', parent);
-    button.innerHTML = 'Play/pause';
+    button.innerHTML = 'Play';
     button.addEventListener('click', () => {
       this.timer ? this._destroyTimer() : this._createTimer();
       button.innerHTML = this.timer ? 'Pause' : 'Play';
@@ -59,6 +59,7 @@ L.Control.Timeline = L.Control.extend({
     this.steps.forEach((step, i) => {
       const point = L.DomUtil.create('span', 'leaflet-timeline-step', wrapper);
       point.innerHTML = step.format(this.options.dateFormat);
+      i === 0 && point.classList.toggle('current');
       point.id = `leaflet-timeline-step-${i}-${this.ID}`;
       point.addEventListener('click', () => {
         this.currentDate = step;
