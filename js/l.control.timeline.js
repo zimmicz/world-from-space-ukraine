@@ -46,10 +46,10 @@ L.Control.Timeline = L.Control.extend({
 
   _createPlayPauseButton(parent) {
     const button = L.DomUtil.create('button', 'leaflet-timeline-button', parent);
-    button.innerHTML = 'Play';
+    button.innerHTML = 'Přehrát';
     button.addEventListener('click', () => {
       this.timer ? this._destroyTimer() : this._createTimer();
-      button.innerHTML = this.timer ? 'Pause' : 'Play';
+      button.innerHTML = this.timer ? 'Zastavit' : 'Přehrát';
     });
   },
 
