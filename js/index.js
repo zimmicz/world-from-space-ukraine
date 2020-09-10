@@ -1,11 +1,10 @@
 import 'regenerator-runtime/runtime';
 import leaflet from 'leaflet';
-import cloneLayer from 'leaflet-clonelayer';
 import 'normalize.css';
 import '../node_modules/leaflet/dist/leaflet.css';
 import 'leaflet.sync';
 import 'leaflet-control-custom';
-import { BASE_LAYER, cloneOverlays } from './config';
+import { cloneOverlays } from './config';
 import Map from './map';
 
 let rightMap;
@@ -42,8 +41,6 @@ leftMap.fitBounds([
   [52.38, 40.23],
 ]);
 
-leftMap.addLayer(BASE_LAYER);
-leftMap.addControl(L.control.layers(leftOverlays));
 leftMap.addControl(splitMapButton);
 
 const toggleRightMap = (leftMap) => {
@@ -57,10 +54,8 @@ const toggleRightMap = (leftMap) => {
     rightMap = right.map;
     leftMap.getContainer().classList.toggle('small');
     rightMap.getContainer().classList.toggle('small');
-    rightMap.addControl(L.control.layers(rightOverlays));
     leftMap.sync(rightMap);
     rightMap.sync(leftMap);
-    rightMap.addLayer(cloneLayer(BASE_LAYER));
     setLeftLegendPosition('bottomleft');
     rightMap.invalidateSize();
     leftMap.invalidateSize();

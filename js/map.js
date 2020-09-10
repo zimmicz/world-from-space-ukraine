@@ -3,6 +3,7 @@ import TimelineControl from './l.control.timeline';
 import LegendControl from './legend/control';
 import SwitchControl from './l.control.switch';
 import { createChart } from './chart';
+import { BASE_LAYER } from './config';
 
 export default function initialize(elem, options) {
   const map = L.map(elem, options);
@@ -13,6 +14,8 @@ export default function initialize(elem, options) {
   let geojsonLayer;
   let timelineControl;
   let legendControl;
+
+  map.addControl(L.control.layers(overlays));
 
   const styleGeoJson = (feature) => {
     const { options } = overlays[Object.keys(overlays).find(key => map.hasLayer(overlays[key]))];
@@ -94,7 +97,7 @@ export default function initialize(elem, options) {
     }
   };
 
-  map.on('baselayerchange', (e) => {
+  const handleBaseLayerChange = (e) => {
     if (timelineControl) {
       map.removeControl(timelineControl);
     }
@@ -110,7 +113,12 @@ export default function initialize(elem, options) {
       legendControl = createLegendControl(e);
       map.addControl(legendControl);
     }
-  });
+  }
+
+  map.on('baselayerchange', handleBaseLayerChange);
+  map.addLayer(BASE_LAYER);
+  map.addLayer(overlays[Object.keys(overlays)[0]]);
+  handleBaseLayerChange({ layer: overlays[Object.keys(overlays)[0]] });
 
   return {
     map,
