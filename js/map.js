@@ -1,4 +1,5 @@
 import leaflet from 'leaflet';
+import cloneLayer from 'leaflet-clonelayer';
 import TimelineControl from './l.control.timeline';
 import LegendControl from './legend/control';
 import SwitchControl from './l.control.switch';
@@ -12,6 +13,7 @@ export default function initialize(elem, options) {
   let currentDate;
   let geojsonSource;
   let geojsonLayer;
+  let switchControl;
   let timelineControl;
   let legendControl;
 
@@ -19,39 +21,57 @@ export default function initialize(elem, options) {
 
   const styleGeoJson = (feature) => {
     const { options } = overlays[Object.keys(overlays).find(key => map.hasLayer(overlays[key]))];
-    const { legend, name, range, type } = options;
+    const { legend, name, range } = options;
     const date = currentDate || range[0];
-    const datePart = date.format('YY-MM');
-    let attr = `${name}__${datePart}m`;
-
-    if (type === 'S5P') {
-      attr = `_${name}_${datePart}m`;
-    }
-
+    const regex = /\d{2}[-_]\d{2}/;
+    const key = Object.keys(feature.properties).find(key => key.match(regex));
+    const attr = key.replace(regex, [date.format('YY'), date.format('MM')].join(key.indexOf('-') > -1 ? '-' : '_'));
     const value = feature.properties[attr];
+
     const { color } = legend.reduce((prev, curr) => Math.abs(curr.value - value) < Math.abs(prev.value - value) ? curr : prev);
     return {
-      color: 'rgba(255, 255, 255, .5)',
+      color: 'rgba(0, 0, 0, .5)',
       fillColor: color,
       fillOpacity: 1,
       weight: 1,
     };
   };
 
-  const toggleLayers = async () => {
+  const fetchVectorLayer = async () => {
     const { options } = overlays[Object.keys(overlays).find(key => map.hasLayer(overlays[key]))];
-    const { name, type } = options;
+    const { name, range, type } = options;
+    currentDate = range[0];
 
     const url = `https://tiles.worldfromspace.cz/UAMD/vector/UA_MD_raions_${name}_${type}.geojson`;
     const result = await fetch(url);
-    geojsonSource = await result.json();
+    return result.json();
+  };
 
+  const loadVectorLayer = async () => {
     if (geojsonLayer) {
+      geojsonSource = await fetchVectorLayer();
+      map.removeLayer(geojsonLayer);
+      geojsonLayer = null;
+
+      geojsonLayer = L.geoJSON(geojsonSource, {
+        style: styleGeoJson,
+      }).bindPopup(createChart);
+
+      map.addLayer(geojsonLayer);
+    }
+  };
+
+  const toggleLayers = async () => {
+    if (geojsonLayer) {
+      switchControl.container.innerHTML = 'Zobrazit adm. jednotky';
       map.removeLayer(geojsonLayer);
       geojsonLayer = null;
       return;
     }
 
+    switchControl.container.innerHTML = 'Skrýt adm. jednotky';
+    currentDate = null;
+    geojsonSource = await fetchVectorLayer();
     geojsonLayer = L.geoJSON(geojsonSource, {
       style: styleGeoJson,
     }).bindPopup(createChart);
@@ -59,12 +79,9 @@ export default function initialize(elem, options) {
     map.addLayer(geojsonLayer);
   }
 
-  map.addControl(L.control.custom({
-    ...SwitchControl,
-    events: {
-      click: toggleLayers,
-    },
-  }));
+  switchControl = createSwitchControl(toggleLayers);
+
+  map.addControl(switchControl);
 
   const setLegendPosition = (position) => {
     legendControl && legendControl.setPosition(position);
@@ -86,15 +103,15 @@ export default function initialize(elem, options) {
       }).bindPopup(createChart);
 
       map.addLayer(geojsonLayer);
-    } else {
-      map.eachLayer(layer => {
-        if (layer.options.range) {
-          const urlParts = layer._url.split('/');
-          urlParts[6] = date.format('YYYY_MM');
-          layer.setUrl(urlParts.join('/'));
-        }
-      });
     }
+
+    map.eachLayer(layer => {
+      if (layer.options.range) {
+        const urlParts = layer._url.split('/');
+        urlParts[6] = date.format('YYYY_MM');
+        layer.setUrl(urlParts.join('/'));
+      }
+    });
   };
 
   const handleBaseLayerChange = (e) => {
@@ -113,10 +130,12 @@ export default function initialize(elem, options) {
       legendControl = createLegendControl(e);
       map.addControl(legendControl);
     }
+
+    loadVectorLayer();
   }
 
   map.on('baselayerchange', handleBaseLayerChange);
-  map.addLayer(BASE_LAYER);
+  map.addLayer(cloneLayer(BASE_LAYER));
   map.addLayer(overlays[Object.keys(overlays)[0]]);
   handleBaseLayerChange({ layer: overlays[Object.keys(overlays)[0]] });
 
@@ -142,3 +161,12 @@ function createLegendControl(e) {
     layer: e.layer,
   });
 }
+
+function createSwitchControl(callback) {
+  return L.control.custom({
+    ...SwitchControl,
+    events: {
+      click: callback,
+    },
+  });
+};
