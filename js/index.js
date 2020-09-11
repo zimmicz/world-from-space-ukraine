@@ -67,6 +67,7 @@ const toggleRightMap = (leftMap) => {
     rightMap.off();
     rightMap.remove();
     rightMap = undefined;
+    leftMap.invalidateSize();
     L.DomUtil.addClass(L.DomUtil.get('map2'), 'hidden');
     setLeftLegendPosition('topright');
     setLeftTimelineSize('small');
