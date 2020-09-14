@@ -106,12 +106,55 @@
         flex: 1 0 50%;
         border-left: 1px solid red;
       }
+
+      #infobox {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index:10000;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .infobox-content {
+        background: white;
+        font-family: sans-serif;
+        box-sizing: border-box;
+        padding: 1rem;
+        position: absolute;
+        left: 10vw;
+        top: 10vh;
+        height: 80vh;
+        max-height: 80vh;
+        overflow: auto;
+        width: 80vw;
+        box-shadow: 0px 0px 5px #444;
+      }
+
+      .infobox-content .button-close {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+      }
     </style>
   </head>
   <body>
     <div id="content">
       <div id="map1"></div>
       <div id="map2" class="hidden"></div>
+    </div>
+
+    <div id="infobox" class="hidden">
+      <div class="infobox-content">
+        <button class="button-close">&times;</button>
+        <h1>Lorem ipsum</h1>
+
+        <p>Dolor sit amet</p>
+      </div>
     </div>
     <script src="./js/index.js"></script>
   </body>

@@ -10,6 +10,18 @@ import Map from './map';
 let rightMap;
 const leftOverlays = cloneOverlays();
 const rightOverlays = cloneOverlays();
+const infobox = document.querySelector('#infobox');
+const closeButton = document.querySelector('.button-close');
+
+const hideInfo = () => {
+  infobox.classList.toggle('hidden');
+};
+
+const showInfo = () => {
+  infobox.classList.toggle('hidden');
+};
+
+closeButton.addEventListener('click', hideInfo);
 
 const splitMapButton = L.control.custom({
   position: 'topleft',
@@ -29,6 +41,24 @@ const splitMapButton = L.control.custom({
   },
 });
 
+const infoButton = L.control.custom({
+  position: 'topleft',
+  content: 'Informace',
+  classes: 'leaflet-bar',
+  style: {
+    background: 'white',
+    backgroundClip: 'padding-box',
+    cursor: 'pointer',
+    left: '260px',
+    margin: '10px',
+    padding: '7px 10px',
+    top: '-187px',
+  },
+  events: {
+    click: showInfo,
+  },
+});
+
 const {
   map: leftMap,
   setLegendPosition: setLeftLegendPosition,
@@ -42,6 +72,7 @@ leftMap.fitBounds([
 ]);
 
 leftMap.addControl(splitMapButton);
+leftMap.addControl(infoButton);
 
 const toggleRightMap = (leftMap) => {
   if (!rightMap) {
