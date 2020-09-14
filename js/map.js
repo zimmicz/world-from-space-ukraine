@@ -25,7 +25,10 @@ export default function initialize(elem, options) {
     const date = currentDate || range[0];
     const regex = /\d{2}[-_]\d{2}/;
     const key = Object.keys(feature.properties).find(key => key.match(regex));
-    const attr = key.replace(regex, [date.format('YY'), date.format('MM')].join(key.indexOf('-') > -1 ? '-' : '_'));
+    const attr = key
+      .replace(name, '~~')
+      .replace(regex, [date.format('YY'), date.format('MM')].join(key.indexOf('-') > -1 ? '-' : '_'))
+      .replace('~~', name);
     const value = feature.properties[attr];
 
     const { color } = legend.reduce((prev, curr) => Math.abs(curr.value - value) < Math.abs(prev.value - value) ? curr : prev);
