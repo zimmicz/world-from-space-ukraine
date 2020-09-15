@@ -74,6 +74,8 @@ leftMap.fitBounds([
 leftMap.addControl(splitMapButton);
 leftMap.addControl(infoButton);
 
+console.log(leftMap);
+
 const toggleRightMap = (leftMap) => {
   if (!rightMap) {
     L.DomUtil.removeClass(L.DomUtil.get('map2'), 'hidden');
@@ -98,9 +100,9 @@ const toggleRightMap = (leftMap) => {
     rightMap.off();
     rightMap.remove();
     rightMap = undefined;
-    leftMap.invalidateSize();
     L.DomUtil.addClass(L.DomUtil.get('map2'), 'hidden');
     setLeftLegendPosition('topright');
     setLeftTimelineSize('small');
+    leftMap.invalidateSize();
   }
 }
