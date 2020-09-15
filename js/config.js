@@ -5,6 +5,14 @@ export const BASE_LAYER = L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 });
 
+export const BASE_LAYER_TONER = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
+  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  subdomains: 'abcd',
+  minZoom: 0,
+  maxZoom: 20,
+  ext: 'png',
+});
+
 const CO_MONTHLY_CAMS = L.tileLayer('https://tiles.worldfromspace.cz/UAMD/CAMS/CO/2017_08/{z}/{x}/{y}.png', {
   tms: true,
   opacity: 0.7,

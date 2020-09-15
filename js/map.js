@@ -4,7 +4,7 @@ import TimelineControl from './l.control.timeline';
 import LegendControl from './legend/control';
 import SwitchControl from './l.control.switch';
 import { createChart } from './chart';
-import { BASE_LAYER } from './config';
+import { BASE_LAYER, BASE_LAYER_TONER } from './config';
 
 export default function initialize(elem, options) {
   const map = L.map(elem, options);
@@ -138,7 +138,7 @@ export default function initialize(elem, options) {
   }
 
   map.on('baselayerchange', handleBaseLayerChange);
-  map.addLayer(cloneLayer(BASE_LAYER));
+  map.addLayer(cloneLayer(BASE_LAYER_TONER));
   map.addLayer(overlays[Object.keys(overlays)[0]]);
   handleBaseLayerChange({ layer: overlays[Object.keys(overlays)[0]] });
 
