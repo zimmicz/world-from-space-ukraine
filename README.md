@@ -11,6 +11,5 @@ Built files will be placed inside `dist` folder. Upload it to your web server to
 
 Develop
 =======
-`npm run dev`
-
-
+Install dependencies with `npm run i`.
+Start the local web server with `npm run dev`.
