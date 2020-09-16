@@ -8,6 +8,7 @@ Build
 `npm run build`
 
 Built files will be placed inside `dist` folder. Upload it to your web server to make the app available to public.
+Do not edit files inside `dist` folder, they would be overriden by the next build.
 
 Develop
 =======
